@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>About Page</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -44,7 +44,7 @@
                         </g>
                     </svg>
                 </div>
-                <h1>Home page</h1>
+
                 <a href="{{ url('/')}}">Home</a> |
                 <a href="{{ URL::to('/about')}}">About</a> | 
                 <a href="{{ route('con')}}">Contact</a> |
