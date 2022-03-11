@@ -5,6 +5,7 @@ use Inertia\Inertia;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 
 /*
@@ -27,8 +28,21 @@ Route::get('/', function () {
     ]);
 });
 
+//category routes 
 Route::get('/category/all', [CategoryController::class, 'AllCat'])->name('all.category');
 Route::post('/category/add', [CategoryController::class, 'AddCat'])->name('store.category');
+Route::get('/category/edit/{id}', [CategoryController::class, 'Edit']);
+Route::post('/category/update/{id}', [CategoryController::class, 'Update']);
+Route::get('/softdelete/category/{id}', [CategoryController::class, 'SoftDelete']);
+Route::get('/pdelete/category/{id}', [CategoryController::class, 'PDelete']);
+Route::get('/category/restore/{id}', [CategoryController::class, 'Restore']);
+
+//for brand
+Route::get('/brand/all', [BrandController::class, 'AllBrand'])->name('all.brand');
+Route::post('/brand/add', [BrandController::class, 'StoreBrand'])->name('store.brand');
+Route::get('/brand/edit/{id}', [BrandController::class, 'Edit']);
+Route::post('/brand/update/{id}', [BrandController::class, 'Update']);
+Route::get('/brand/delete/{id}', [BrandController::class, 'Delete']);
 
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboardsvue', function () {
