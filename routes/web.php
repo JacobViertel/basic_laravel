@@ -44,6 +44,9 @@ Route::get('/brand/edit/{id}', [BrandController::class, 'Edit']);
 Route::post('/brand/update/{id}', [BrandController::class, 'Update']);
 Route::get('/brand/delete/{id}', [BrandController::class, 'Delete']);
 
+// Multi Image
+Route::get('/mutli/image', [BrandController::class, 'Multpic'])->name('multi.image');
+Route::post('/mutli/add', [BrandController::class, 'StoreImg'])->name('store.image');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboardsvue', function () {
     return Inertia::render('Dashboard');

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Image;
 use App\Models\Brand;
+use App\Models\Multipic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
@@ -27,12 +29,17 @@ class BrandController extends Controller
         ]);
 
         $brand_image = $request->file('brand_image');
-        $name_gen = hexdec(uniqid());
-        $img_ext = strtolower($brand_image->getClientOriginalExtension());
-        $img_name = $name_gen.'.'.$img_ext;
-        $up_location = 'image/brand/';
-        $last_img = $up_location . $img_name;
-        $brand_image->move($up_location, $last_img);
+        $name_gen = hexdec(uniqid()).'.'.$brand_image->getClientOriginalExtension();
+        Image::make($brand_image)->resize(300, 200)->save('image/brand/'.$name_gen);
+        $last_img = 'image/brand/'.$name_gen;
+
+        // $img_ext = strtolower($brand_image->getClientOriginalExtension());
+        // $img_name = $name_gen.'.'.$img_ext;
+        // $up_location = 'image/brand/';
+        // $last_img = $up_location . $img_name;
+        // $brand_image->move($up_location, $last_img);
+
+
 
         Brand::insert([
             'brand_name' => $request->brand_name,
@@ -90,5 +97,30 @@ class BrandController extends Controller
 
         Brand::find($id)->delete();
         return Redirect()->back()->with('success', 'Brand deleted successful');
+    }
+
+    public function Multpic(){
+        $images =  Multipic::all();
+        return view('admin.multipic.index', compact('images'));
+    }
+
+    public function StoreImg(Request $request){
+        $images = $request->file('image');
+
+        foreach($images as $image){
+            $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+            Image::make($image)->resize(300, 300)->save('image/multi/'.$name_gen);
+            $last_img = 'image/multi/'.$name_gen;
+
+            Multipic::insert([
+                'image' => $last_img,
+                'created_at' => Carbon::now()
+            ]); 
+        }
+
+        
+
+        return Redirect()->back()->with('success', 'Mutli Pics inserted successfully');
+
     }
 }
