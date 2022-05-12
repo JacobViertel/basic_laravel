@@ -1,20 +1,7 @@
-<x-app-layout>
-    <x-slot name="header">
-
-        @if(session('success'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>{{ session('success') }}</strong> You can continue withyour work
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        @endif
-
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            All Brand
-        </h2>
-    </x-slot>
-    <div class="py-12">
+@extends('admin.admin_master')
+@section('admin')
+ 
+ <div class="py-12">
         <div class="container">
             <div class="row">
                 <div class="col-md-8">
@@ -101,4 +88,4 @@
         
     </div>
 
-</x-app-layout>
+@endsection
